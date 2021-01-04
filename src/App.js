@@ -6,10 +6,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { Card,CardContent} from '@material-ui/core';
 
 import InfoBox from './InfoBox'
-import Map from './Map'
+// import Map from './Map'
 import Table from './Table'
-import { sortData } from './util'
-import LineGraph from './LineGraph'
+import { sortData,prettyPrintStat } from './util'
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -84,19 +83,17 @@ function App() {
         </div>
 
         <div className="app_stats">
-          <InfoBox title="Coronavirus Cases" cases={countryInfo.todayCases} total={countryInfo.cases} />
-          <InfoBox title="Recoverd" cases={countryInfo.todayRecovered} total={countryInfo.recovered} />
-          <InfoBox title="Deaths" cases={countryInfo.todayDeaths} total={countryInfo.deaths} />
+          <InfoBox title="Coronavirus Cases" cases={prettyPrintStat(countryInfo.todayCases)} total={prettyPrintStat(countryInfo.cases)} />
+          <InfoBox title="Recoverd" cases={prettyPrintStat(countryInfo.todayRecovered)} total={prettyPrintStat(countryInfo.recovered)} />
+          <InfoBox title="Deaths" cases={prettyPrintStat(countryInfo.todayDeaths)} total={prettyPrintStat(countryInfo.deaths)} />
         </div>
 
-        <Map />
+        {/* <Map /> */}
       </div>
       <Card className="app_right">
               <CardContent>
                 <h4>Live Cases by country</h4>
                 <Table countries={tableData} />
-                <h4>Worldwide new cases</h4>
-                <LineGraph />
               </CardContent>
       </Card>
     </div>
