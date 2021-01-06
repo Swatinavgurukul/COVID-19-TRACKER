@@ -1,0 +1,24 @@
+.infoBox {
+    flex: 1;
+  }
+
+.infoBox_title {
+    color: #6c757d;
+    font-weight: 700 !important;
+    font-size: 0.8rem !important;
+} 
+ 
+  
+.infoBox_cases {
+    /* color: #cc1034; */
+    font-weight: 600;
+    font-size: 1.75rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .infoBox_total {
+    color: #6c757d;
+    font-weight: 700 !important;
+    font-size: 0.8rem !important;
+  }

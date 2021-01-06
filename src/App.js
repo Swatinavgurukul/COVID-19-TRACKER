@@ -3,12 +3,11 @@ import "./App.css"
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import { Card,CardContent} from '@material-ui/core';
+import { Card, CardContent } from '@material-ui/core';
 
 import InfoBox from './InfoBox'
-// import Map from './Map'
 import Table from './Table'
-import { sortData,prettyPrintStat } from './util'
+import { sortData, prettyPrintStat } from './util'
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -16,11 +15,11 @@ function App() {
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([])
   useEffect(() => {
-   fetch("https://disease.sh/v3/covid-19/all")
-   .then((response)=>response.json())
-   .then((data) => {
-     setCountryInfo(data);
-   })
+    fetch("https://disease.sh/v3/covid-19/all")
+      .then((response) => response.json())
+      .then((data) => {
+        setCountryInfo(data);
+      })
   }, []);
 
   useEffect(() => {
@@ -46,17 +45,17 @@ function App() {
   const onCountryChange = async (e) => {
     const countryCode = e.target.value;
 
-    const url =  countryCode === "worldwide" ?
-    "https://disease.sh/v3/covid-19/all"
-    : `https://disease.sh/v3/covid-19/countries/${countryCode}`
+    const url = countryCode === "worldwide" ?
+      "https://disease.sh/v3/covid-19/all"
+      : `https://disease.sh/v3/covid-19/countries/${countryCode}`
 
     await fetch(url)
-    .then((response)=>response.json())
-    .then((data)=>{
-      setCountry(countryCode);
-      setCountryInfo(data);
+      .then((response) => response.json())
+      .then((data) => {
+        setCountry(countryCode);
+        setCountryInfo(data);
 
-    })
+      })
   }
 
 
@@ -82,19 +81,30 @@ function App() {
           </FormControl>
         </div>
 
+        <div
+          className="image">
+          <div style={{
+            paddingBottom: (350 / 800 * 100) + '%'
+          }} />
+          <img
+            className="image_image"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvXu5ucnwJ5quV8xrvJeX2IEY2ztwCYRw-MQ&usqp=CAU"
+          />
+        </div>
+
         <div className="app_stats">
+
           <InfoBox title="Coronavirus Cases" cases={prettyPrintStat(countryInfo.todayCases)} total={prettyPrintStat(countryInfo.cases)} />
           <InfoBox title="Recoverd" cases={prettyPrintStat(countryInfo.todayRecovered)} total={prettyPrintStat(countryInfo.recovered)} />
           <InfoBox title="Deaths" cases={prettyPrintStat(countryInfo.todayDeaths)} total={prettyPrintStat(countryInfo.deaths)} />
         </div>
-
-        {/* <Map /> */}
       </div>
+
       <Card className="app_right">
-              <CardContent>
-                <h4>Live Cases by country</h4>
-                <Table countries={tableData} />
-              </CardContent>
+        <CardContent>
+          <h4>Live Cases by country</h4>
+          <Table countries={tableData} />
+        </CardContent>
       </Card>
     </div>
   )
